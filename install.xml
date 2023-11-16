@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+  <name><![CDATA[Show weight by product in cart]]></name>
+  <code><![CDATA[show_weight_by_product_in_cart]]></code>
+	<version><![CDATA[1.0]]></version>
+	<author><![CDATA[REDS PRAI]]></author>
+	<link><![CDATA[https://www.agenciaprai.com/]]></link>
+		
+	<file path="catalog/controller/checkout/cart.php" error="skip">
+		<operation>
+			<search><![CDATA['quantity'  => $product['quantity'],]]></search>
+			<add position="after"><![CDATA['weight'    => $this->weight->format($product['weight'],$product['weight_class_id']),]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/checkout/cart.twig" error="skip">
+		<operation>
+			<search><![CDATA[{% if product.reward %}]]></search>
+			<add position="before"><![CDATA[<br>{{ text_weight }} {{ product.weight }}]]></add>
+		</operation>
+	</file>
+	<file path="catalog/language/pt-br/checkout/checkout.php" error="skip">
+		<operation>
+			<search><![CDATA[// Text]]></search>
+			<add position="after"><![CDATA[$_['text_weight']             = 'Peso:';]]></add>
+		</operation>
+	</file>
+</modification>
